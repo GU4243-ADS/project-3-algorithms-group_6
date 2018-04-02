@@ -37,7 +37,7 @@ B. Evaluate potential performance enhancements on the baseline momeory-based alg
 
 4. Jeh, G., & Widom, J. (2002, July).  SimRank: a measure of structural-context similarity.  In Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining (pp. 538-543). ACM.
 * Proposes the SimRank similarity measure.
-
+  
 #### Evaluation
 
 You need to compare the performance of the memory-based and model-based algorithms (task A) and also the memory-based model with various component combinations (task B).  To do so you you will need to consider some sort of performance metric.  For the web data, you can use ranked scoring evaluation as in Paper [1].  For the movie data you can use mean absolute error as introduced in Paper [2].  Other evaluation criteria, like ROC sensitivty from Paper [2] are encouraged.
