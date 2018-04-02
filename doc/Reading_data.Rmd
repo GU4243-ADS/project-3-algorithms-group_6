@@ -1,0 +1,102 @@
+---
+title: "ADS"
+author: "Sophie Beiers"
+date: "4/2/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data
+
+### MS DATA
+```{r}
+# MS DATA 
+setwd("~/Dropbox/QMSS/Applied Data Science/Project3")
+source("./lib/functions.R")
+
+# Load the data
+MS_train <- read.csv("./Proj3_Data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
+MS_train <- MS_train[, 2:4]
+
+
+# Transform from narrow to wide, i.e. user-item matrix 
+# using MS_data_transform function
+
+# Below takes 2.17 minutes
+MS_UI <- MS_data_transform(MS_train)
+save(MS_UI, file = "MS_UI.RData")
+
+
+# Matrix Calculations
+visit_nums <- rowSums(MS_UI != 0)
+
+table(visit_nums)
+mean(visit_nums)
+median(visit_nums)
+
+system.time(rowSums(MS_UI, na.rm = TRUE))
+
+```
+
+### Movie Data
+```{r}
+# Load the data
+movie_train <- read.csv("./Proj3_Data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
+movie_train <- movie_train[, 2:4]
+
+# How we might fill in the user-item matrix using %in%
+
+# Find sorted lists of users and vroots
+users  <- sort(unique(movie_train$User))
+movies <- sort(unique(movie_train$Movie))
+
+# Initiate the UI matrix
+UI            <- matrix(NA, nrow = length(users), ncol = length(movies))
+row.names(UI) <- users
+colnames(UI)  <- movies
+
+# We consider just user 1, finding user 1's movies and ratings
+movies  <- movie_train$Movie[movie_train$User == users[1]]
+ratings <- movie_train$Score[movie_train$User == users[1]]
+
+ord     <- order(movies)
+movies  <- movies[ord]
+ratings <- ratings[ord]
+
+system.time(UI[1, colnames(UI) %in% movies] <- ratings)
+  
+all(UI[1, ] == UI[2,], na.rm = TRUE)
+
+# Compute the full matrix
+# Below takes about 4 minutes
+
+movie_UI <- movie_data_transform(movie_train)
+save(movie_UI, file = "movie_UI.RData")
+
+# Some calculations
+total_ratings <- rowSums(movie_UI, na.rm = TRUE)
+
+table(total_ratings)
+mean(total_ratings)
+median(total_ratings)
+
+
+```
+
+```{r}
+# Calculate the full weights on the movie data
+# The below took 87 minutes on my Macbook, 35 on my iMac
+
+movie_sim <- calc_weight(movie_UI)
+save(movie_sim, file = "movie_sim.RData")
+
+
+# Calculate the full weights on the MS data
+# The below took 30 minutes on my Macbook and 14 on my iMac
+
+MS_sim <- calc_weight(MS_UI)
+save(MS_sim, file = "MS_sim.RData")
+```
