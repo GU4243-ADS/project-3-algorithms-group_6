@@ -28,6 +28,9 @@ MS_train <- MS_train[, 2:4]
 # Below takes 2.17 minutes
 MS_UI <- MS_data_transform(MS_train)
 save(MS_UI, file = "MS_UI.RData")
+# load data and write to csv for convenience
+load("../data/MS_UI.RData")
+write.csv(MS_UI, "../data/ms_ui.csv")
 
 
 # Matrix Calculations
@@ -75,6 +78,9 @@ all(UI[1, ] == UI[2,], na.rm = TRUE)
 
 movie_UI <- movie_data_transform(movie_train)
 save(movie_UI, file = "movie_UI.RData")
+# load data and write to csv for convenience
+load("../data/movie_UI.RData")
+write.csv(movie_UI, "../data/movie_ui.csv")
 
 # Some calculations
 total_ratings <- rowSums(movie_UI, na.rm = TRUE)
