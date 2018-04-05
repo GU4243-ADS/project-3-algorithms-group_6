@@ -1,0 +1,139 @@
+---
+title: "Memory based"
+author: "Shan and Huijun"
+date: "April 4, 2018"
+output: html_document
+---
+
+
+# We first load the data
+
+```{r setup, include=FALSE}
+setwd("../lib")
+source("functions.R")
+```
+
+
+# add a if statement to check if the file exists, to save time
+```{r web data, include=FALSE}
+
+setwd("../data")
+if(!file.exists("../data/MS_UI.RData")){
+   MS_train <- read.csv("../data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
+    MS_train <- MS_train[, 2:4]
+    # Below takes 2.17 minutes
+    # Transform from narrow to wide, i.e. user-item matrix 
+    # using MS_data_transform function
+    MS_UI <- MS_data_transform(MS_train)
+    save(MS_UI, file = "MS_UI.RData")
+}else{
+  load("../data/MS_UI.RData")
+}
+
+```
+
+
+```{r movie data, include=FALSE}
+# Load the movie data
+setwd("../data")
+if(!file.exists("../data/movie_UI.RData")){
+    # take about 4 mins
+    movie_train <- read.csv("../data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
+    movie_train <- movie_train[, 2:4]
+    movie_UI <- movie_data_transform(movie_train)
+    save(movie_UI, file = "movie_UI.RData")
+}else{
+  load("../data/movie_UI.RData")
+}
+     
+```
+
+
+```{r web similarity}
+
+setwd("../data")
+# Calculate the full weights on the MS data
+# The below took 30 minutes 
+if(!file.exists("../data/MS_sim.RData")){
+   MS_sim <- calc_weight(MS_UI)
+   save(MS_sim, file = "MS_sim.RData")
+}else{
+  load("../data/MS_sim.RData")
+}
+
+```
+
+
+```{r movie similarity}
+
+setwd("../data")
+# Calculate the full weights on the movie data
+# The below took 87 minutes 
+if(!file.exists("../data/movie_sim.RData")){
+   movie_sim <- calc_weight(movie_UI)
+   save(movie_sim, file = "movie_sim.RData")
+}else{
+  load("../data/movie_sim.RData")
+}
+
+```
+
+
+```{r web predict}
+setwd("../output")
+# Calculate predictions for MS
+# This calculation took me 15 minutes
+if(!file.exists("../output/MS_pred.RData")){
+   MS_pred <- pred_matrix(MS_UI, MS_sim)
+   save(MS_pred, file = "MS_pred.RData")
+}else{
+  load("../output/MS_pred.RData")
+}
+```
+
+
+```{r movie predict}
+setwd("../output")
+# Calculate predictions for MS
+# This calculation took me 15 minutes
+if(!file.exists("../output/movie_pred.RData")){
+   movie_pred <- pred_matrix(movie_UI, movie_sim)
+   save(movie_pred, file = "movie_pred.RData")
+}else{
+  load("../output/movie_pred.RData")
+}
+```
+
+# read test data
+```{r test data}
+
+MS_test <- read.csv("../data/MS_sample/data_test.csv", as.is = TRUE, header = TRUE)
+movie_test <- read.csv("../data/eachmovie_sample/data_test.csv", as.is = TRUE, header = TRUE)
+
+MS_test<-MS_test[, 2:4];movie_test<-movie_test[, 2:4]
+
+MS_test <- MS_data_transform(MS_test)
+movie_test <- movie_data_transform(movie_test)
+
+```
+
+# check prediction accuarcy
+```{r accuarcy}
+
+MS_pred<-round(MS_pred,0)
+movie_pred<-round(movie_pred,0)
+
+MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
+movie_pred<-movie_pred[rownames(movie_pred),colnames(movie_pred)]
+
+```
+
+
+
+
+
+
+
+
+
+
