@@ -125,11 +125,12 @@ calc_weight <- function(data, method = "pearson") {
         }
         return(cosine(rowA[joint_values],rowB[joint_values]))
       }
-      # else if (method = 'entropy'){
-      #   if(!require("entropy")){
-      #     install.packages("entropy")
-      #   }
-      # }
+      else if (method == 'entropy'){
+        if(!require("infotheo")){
+          install.packages("infotheo")
+        }
+        return(1-condentropy(rowA[joint_values], rowB[joint_values]))
+      }
     }
   }
   
@@ -140,6 +141,7 @@ calc_weight <- function(data, method = "pearson") {
   }
   return(round(weight_mat, 4))
 }
+
 
 
 
