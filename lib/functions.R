@@ -131,6 +131,9 @@ calc_weight <- function(data, method = "pearson") {
         }
         return(1-condentropy(rowA[joint_values], rowB[joint_values]))
       }
+      else if (method =='msd'){
+        return(1-mean((rowA[joint_values] - rowB[joint_values])^2))
+      }
     }
   }
   
