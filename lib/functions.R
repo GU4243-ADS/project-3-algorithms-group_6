@@ -111,10 +111,25 @@ calc_weight <- function(data, method = "pearson") {
     joint_values <- !is.na(rowA) & !is.na(rowB)
     if (sum(joint_values) == 0) {
       return(0)
-    } else {
+    } 
+    else {
       if (method == 'pearson') {
         return(cor(rowA[joint_values], rowB[joint_values], method = 'pearson'))
       }
+      else if (method == 'spearman') {
+        return(cor(rowA[joint_values], rowB[joint_values], method = 'spearman'))
+      }
+      else if (method == 'cosine'){
+        if(!require("lsa")){
+          install.packages("lsa")
+        }
+        return(cosine(rowA[joint_values],rowB[joint_values]))
+      }
+      # else if (method = 'entropy'){
+      #   if(!require("entropy")){
+      #     install.packages("entropy")
+      #   }
+      # }
     }
   }
   
