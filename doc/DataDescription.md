@@ -17,7 +17,7 @@ Each has team has two tasks:
 A. *Implement* and *evaluate* the performance of two collaborative filtering algorithms -- one model-based and the other memory-based -- on both datasets.
     [Model 1] The model-based algorithm you are implementing is the clustering algorithm discussed in paper [1] section 2.3.  In the paper, the number of classes is determined via a marginal likelihood method, however we will just use cross-validation.  Note that you will need to code an EM algorithm here, and the method uses a Naive Bayes framework.  If these are new ideas for you, it may be helpful to do some background reading (in, for example, [The Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/)).
     [Model 2] The memory-based algorithm you are implementing is a user-based neighborhood model using Pearson's correlation for similarity weight.  This is introduced in equations (1) and equations (2) in paper [2].
-    
+       
 B. Evaluate potential performance enhancements on the baseline momeory-based algorithm (Model 2 above) by considering changes to various components of the algorithm.
     [All Groups] Consider different similarity weights: (1) Spearman's correlation, (2) vector similarity, (3) entropy, (4) mean-square difference, and (5) SimRank.  Most are discussed in section 5.1 of paper [2], and SimRank is discussed in paper [4].
     [Groups 1, 2, 3] Consider significance and variance weighting. Section 5.2 and 5.3 of paper [2].
