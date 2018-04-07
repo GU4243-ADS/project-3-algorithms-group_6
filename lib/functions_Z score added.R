@@ -162,7 +162,7 @@ zscore <- function(weight, data, i, j){
   return (p)
 }
 
-cal_zscore <- function(weights, df, df_test){
+cal_zscore <- function(weights, data){
   zscore_mat <- matrix(NA, nrow = nrow(data), ncol = ncol(data))
   for (i in 1:nrow(data)){
     for (j in 1:ncol(data)){
