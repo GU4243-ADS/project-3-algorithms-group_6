@@ -163,7 +163,7 @@ zscore <- function(weight, data, i, j){
 }
 
 cal_zscore <- function(weight, train, test){
-  zscore_mat <- matrix(NA, nrow = nrow(data), ncol = ncol(data))
+  zscore_mat <- matrix(NA, nrow = nrow(test), ncol = ncol(test))
   for (i in 1:nrow(test)){
     for (j in 1:ncol(test)){
       if (!is.na(test[i, j])){
