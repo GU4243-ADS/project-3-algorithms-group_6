@@ -162,12 +162,12 @@ zscore <- function(weight, data, i, j){
   return (p)
 }
 
-cal_zscore <- function(weight, data){
+cal_zscore <- function(weight, train, test){
   zscore_mat <- matrix(NA, nrow = nrow(data), ncol = ncol(data))
-  for (i in 1:nrow(data)){
-    for (j in 1:ncol(data)){
-      if (!is.na(df_test[i, j])){
-        zscore[i, j] <- zscore(weight, data, i, j)
+  for (i in 1:nrow(test)){
+    for (j in 1:ncol(test)){
+      if (!is.na(test[i, j])){
+        zscore[i, j] <- zscore(weight, train, i, j)
       }
     }
   }
