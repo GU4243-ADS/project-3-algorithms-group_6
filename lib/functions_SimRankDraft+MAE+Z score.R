@@ -218,3 +218,13 @@ mae <- function(true,prediction){
   mae <- mean(abs(true-prediction), na.rm = T)
   return(mae)
 }
+
+#SimRank draft
+calc_simrank <- function(data,dc,R) {
+  data       <- as.matrix(data)
+  if(!require("diceR")){
+    install.packages("diceR")
+  }
+  weight_mat <- srs(data, 0.8, 30)
+  return(weight_mat)
+}
