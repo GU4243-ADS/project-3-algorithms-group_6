@@ -234,5 +234,8 @@ pred_z_score_matrix <- function(data, simweights) {
   return(pred_mat)
 }
 
-
+mae <- function(test,prediction){
+  mae <- mean(abs(test-prediction), na.rm = T)
+  return(mae)
+}
 
