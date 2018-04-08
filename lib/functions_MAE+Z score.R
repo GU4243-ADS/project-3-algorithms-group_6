@@ -213,3 +213,8 @@ pred_matrix <- function(data, simweights) {
   return(pred_mat)
 }
 
+# MAE
+mae <- function(true,prediction){
+  mae <- mean(abs(true-prediction), na.rm = T)
+  return(mae)
+}
