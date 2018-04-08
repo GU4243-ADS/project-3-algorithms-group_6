@@ -16,7 +16,7 @@ setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
 ```
 
 ### MS Data
-```{r reading_data, eval = FALSE}
+```{r reading ms data, eval = FALSE}
 
 # Load the data
 MS_train <- read.csv("../data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
@@ -38,66 +38,8 @@ save(MS_test, file = "MS_UI_test.RData")
 write.csv(MS_test, "ms_test.csv")
 ```
 
-```{r}
-###############################################################
-######## Building the UI matrix for the EachMovie Data ########
-###############################################################
-
-setwd("/Users/cynthiarush/Dropbox/ADS_Spring_2018/Project3/Proj3_Data/eachmovie_sample")
-
-# Load the data
-movie_train <- read.csv("data_train.csv", as.is = TRUE, header = TRUE)
-movie_train <- movie_train[, 2:4]
-
-# How we might fill in the user-item matrix using %in%
-
-# Find sorted lists of users and vroots
-
-
-# Initiate the UI matrix
-
-
-
-
-# How we might fill in the user-item matrix using loops 
-
-long.in <- function(movies, ratings) {
-  
-  # Cycle through the ratings, find the corresponding column
-  for (i in 1:length(ratings)) {
-    column <- which(colnames(UI) == movies[i])
-    UI[2, column] <- ratings[i]
-    print(column)
-  }
-  
-}
-
-
-system.time(long.in(movies, ratings))
-  
-all(UI[1, ] == UI[2,], na.rm = TRUE)
-
-# Compute the full matrix
-# Below takes about 4 minutes
-
-movie_UI <- movie_data_transform(movie_train)
-save(movie_UI, file = "movie_UI.RData")
-
-# Some calculations
-
-
-table(total_ratings)
-mean(total_ratings)
-median(total_ratings)
-
-
-
-
-```
-
-
 ### Movie Data
-```{r, eval = FALSE}
+```{r reading movie data, eval = FALSE}
 # Load the data from csv and write to Rdata
 movie_train <- read.csv("./Proj3_Data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
 movie_train <- movie_train[, 2:4]
@@ -144,5 +86,17 @@ load(ms_train.Rdata)
 load(ms_test.Rdata)
 ```
 
+# Models 
+## Memory-based Models 
+```{r}
 
+```
+
+
+
+# Predictions
+```{r}
+
+
+```
 
