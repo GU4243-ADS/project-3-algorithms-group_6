@@ -147,8 +147,8 @@ calc_weight <- function(data, method = "pearson") {
 
 #Z-score Normalization
 zscore <- function(weight, data, i, j){
-  par <- rep(0, length(data))
-  for (k in 1:length(data)){
+  par <- rep(0, nrow(data))
+  for (k in 1:nrow(data)){
     r_kj <- data[k,j]
     r_k <- mean(data[k, ], na.rm = T)
     sd_k <- sd(data[k, ], na.rm = F)
