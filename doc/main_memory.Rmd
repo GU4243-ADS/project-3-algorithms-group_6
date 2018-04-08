@@ -25,9 +25,9 @@ save(weight_pearson_MS_train, file = 'weight_pearson_MS_train.RData')
 
 weight_pearson_movie_train <- calc_weight(movie_UI, method = 'pearson')
 save(weight_pearson_movie_train, file = 'weight_pearson_movie_train.RData')
-
+```
 ### Calculate spearman correlation
-
+```{r}
 weight_spearman_MS_train <- calc_weight(MS_UI, method = 'spearman')
 save(weight_spearman_MS_train, file = 'weight_spearman_MS_train.RData')
 
@@ -46,8 +46,7 @@ save(weight_cosine_movie_train, file = 'weight_cosine_movie_train.RData')
 ```{r}
 weight_entropy_MS_train <- calc_weight(MS_UI, method = 'entropy')
 save(weight_entropy_MS_train, file = 'weight_entropy_MS_train.RData')
-```
-```{r}
+
 weight_entropy_movie_train <- calc_weight(movie_UI, method = 'entropy')
 save(weight_entropy_movie_train, file = 'weight_entropy_movie_train.RData')
 ```
@@ -55,8 +54,7 @@ save(weight_entropy_movie_train, file = 'weight_entropy_movie_train.RData')
 ```{r}
 weight_msd_MS_train <- calc_weight(MS_UI, method = 'msd')
 save(weight_msd_MS_train, file = 'weight_msd_MS_train.RData')
-```
-```{r}
+
 weight_msd_movie_train <- calc_weight(movie_UI, method = 'msd')
 save(weight_msd_movie_train, file = 'weight_msd_movie_train.RData')
 ```
