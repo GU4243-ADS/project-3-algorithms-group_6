@@ -1,0 +1,88 @@
+---
+title: "Main File"
+authors: "Group 6"
+date: "4/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
+library(readr)
+```
+
+## Reading In Data
+```{r}
+MS_train <- load("../data/MS_UI.RData")
+MS_test <- read_csv("../data/ms_ui_test.csv")
+
+movie_train <- load("../data/movie_UI.RData")
+movie_test <- load("../data/movie_UI_test.RData")
+```
+
+
+## Predictions 
+```{r}
+# get from EM algorithm 
+# data <-  load(movies)
+# gamma <- 
+# mu <-  
+# pi <-
+# items <- nrow(data)
+# users <- ncol(data)
+
+# mu which is a vector (means of groups)
+# gamma which is a 3d object (groups, movies or things to vote on, ratings) probability that within each group within each movie, the ratings of that movie being correct 
+
+# gamma informs which cluster you;re going to be in
+
+
+user_cluster <- apply(aic, 1, which.max)
+# Prediction from Cluster Algorithm
+
+pred_func <- function(data, gamma, mu, pi, items){
+  data[is.na(data)] <- 0
+  item_test <- colnames(data)
+  order <- match(item_test, items)
+  
+  
+  preds <- as.data.frame(matrix(NA, nrow = N_item, ncol = N_user))
+  names(predictions) <- item_test
+
+# assign user to cluster with highest prediction 
+
+  error <- 0
+  
+  for(i in 1:items){
+    for(j in 1:users){
+      cluster <- user_cluster[i]
+      index <- order[j] # order by movie such that each user is rating same movie
+      # form predictions
+      preds[i,j] <- gamma[2, index, cluster]*mu[cluster]
+    }
+  }
+  
+  save(preds, file = "../data/EM_pred.Rdata")
+  return(preds)
+}
+
+cluster_preds <- pred_func(test_data, gamma, mu, aic, items)
+
+#aic is weighting matrix of cluster assignemnts
+
+
+# gamma is  probability of rating a score on a movie/the probability of rating the movie
+# aic is the assignmen
+# k is ;probability, so score * probability
+```
+
+
+
+```{r}
+est.rating <- function (data, ){
+  n.users <- nrows(data)
+}
+```
+
+
+
