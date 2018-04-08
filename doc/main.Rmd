@@ -1,0 +1,102 @@
+---
+title: "main"
+author: "Sophie Beiers"
+date: "4/8/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Libraries & Reading In Data
+```{r}
+source("./lib/functions.R")
+setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
+```
+
+### MS Data
+```{r reading ms data, eval = FALSE}
+
+# Load the data
+MS_train <- read.csv("../data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
+MS_train <- MS_train[, 2:4]
+
+MS_test <- read.csv("../data/MS_sample/data_test.csv", as.is = TRUE, header = TRUE)
+MS_test <- MS_test[, 2:4]
+
+
+# Transform from narrow to wide, i.e. user-item matrix 
+# using MS_data_transform function & save to Rdata and csvs. 
+
+MS_train <- MS_data_transform(MS_train)
+save(MS_train, file = "MS_UI.RData")
+write.csv(MS_train, "ms_train.csv")
+
+MS_test <- MS_data_transform(MS_test)
+save(MS_test, file = "MS_UI_test.RData")
+write.csv(MS_test, "ms_test.csv")
+```
+
+### Movie Data
+```{r reading movie data, eval = FALSE}
+# Load the data from csv and write to Rdata
+movie_train <- read.csv("./Proj3_Data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
+movie_train <- movie_train[, 2:4]
+movie_test <- read.csv("./Proj3_Data/eachmovie_sample/data_test.csv", as.is = TRUE, header = TRUE)
+movie_test <- movie_test[, 2:4]
+
+users  <- sort(unique(movie_train$User))
+movies <- sort(unique(movie_train$Movie))
+
+# initialize UI matrix
+UI            <- matrix(NA, nrow = length(users), ncol = length(movies))
+row.names(UI) <- users
+colnames(UI)  <- movies
+
+# We consider just user 1, finding user 1's movies and ratings
+movies  <- movie_train$Movie[movie_train$User == users[1]]
+ratings <- movie_train$Score[movie_train$User == users[1]]
+
+ord     <- order(movies)
+movies  <- movies[ord]
+ratings <- ratings[ord]
+
+system.time(UI[1, colnames(UI) %in% movies] <- ratings)
+
+total_ratings <- rowSums(movie_UI, na.rm = TRUE)
+
+# Compute the full matrix
+# save to Rdata and csvs 
+movie_train <- movie_data_transform(movie_train)
+save(movie_train, file = "movie_train.RData")
+write.csv(movie_train, "../data/movie_train.csv")
+
+movie_test <- movie_data_transform(movie_test)
+save(movie_test, file = "movie_test.RData")
+write.csv(movie_test, "../data/movie_test.csv")
+```
+
+### Loading Data
+```{r load data}
+# load training and testing Rdata sets
+load(movie_train.Rdata)
+load(movie_test.Rdata)
+load(ms_train.Rdata)
+load(ms_test.Rdata)
+```
+
+# Models 
+## Memory-based Models 
+```{r}
+
+```
+
+
+
+# Predictions
+```{r}
+
+
+```
+
