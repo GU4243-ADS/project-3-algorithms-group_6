@@ -1,6 +1,6 @@
 ---
 title: "main"
-author: "all our names here"
+author: "group 6"
 date: "4/8/2018"
 output: html_document
 ---
@@ -306,6 +306,8 @@ for (i in nrow(notNAs)){
 # rng <- 1:6
 
 #ms dataset 
+
+
 ```
 >>>>>>> 9a2aeaa271b5bcb4b4238e216923e035689906da
 
@@ -534,30 +536,3 @@ movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
 mae(movie_UI_test, movie_pred)
 ```
 
-## EM Algorithm
-```{r}
-# movie data
-em_pred(movie_UI, gamma, sft, cl = 12, rng)
-
-notNAs <- which(!is.na(movie_UI_test), TRUE)
-load("../data/cluster_prediction.RData")
-
-
-# calculate MAE 
-mae <- 0
-for (i in nrow(notNAs)){
-    mae <- mae + sum(abs(preds[notNAs[i,1], notNAs[i,2]] - movie_UI_test[notNAs[i,1], notNAs[i,2]]))/nrow(notNAs)
-  
-}
-
-## testing below
-# nitems <- dim(movie_UI)[2]
-# nusers <- dim(movie_UI)[1]
-# 
-# gamma <- array(1/6, dim = c(6, nitems, 12))
-# sft <- matrix(0, nrow = nusers, ncol = 12)
-# sft[ ,6] <- rep(1, nusers)
-# rng <- 1:6
-
-#ms dataset 
-```
