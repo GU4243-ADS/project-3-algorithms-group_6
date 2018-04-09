@@ -136,8 +136,9 @@ The EM algorithm can be found in the python jupyter notebook in the docs folder.
 
 # Predictions
 ## Memory Based Algorithm
-#### Load similarity weights
+#### Load Similarity Weights
 ```{r}
+# MS weight data are in GitHub repo, but movie weight data are too large to be uploaded to GitHub, so we uploaded them to GoogleDrive. The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
 load("../output/weight_pearson_MS_train.RData")
 load("../output/weight_pearson_movie_train.RData")
 load("../output/weight_spearman_MS_train.RData")
@@ -179,7 +180,7 @@ save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
 movie_pred_cosine <- pred_matrix(movie_UI, weight_cosine_movie_train)
 save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
 ```
-#### With mean-square difference 
+#### With Mean-square Difference 
 ```{r web predict}
 # Calculate predictions for MS
 MS_pred_msd <- pred_matrix(MS_UI, weight_msd_MS_train)
@@ -226,7 +227,7 @@ save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
 movie_pred_cosine <- pred_z_score_matrix(movie_UI, weight_cosine_movie_train)
 save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
 ```
-#### With mean-square difference 
+#### With Mean-square Difference 
 ```{r web predict}
 # Calculate predictions for MS
 MS_pred_msd_zscore <- pred_z_score_matrix(MS_UI, weight_msd_MS_train)
@@ -277,6 +278,7 @@ for (i in nrow(notNAs)){
 ## Evaluation
 ### Load prediction data
 ```{r}
+# Again, MS prediction data are in GitHub repo, but movie weight data are in Google Drive. The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
 load("../output/movie_pred_entropy_zscore.RData")
 load("../output/MS_pred_entropy_zscore.RData")
 load("../output/movie_pred_msd_zscore.RData")
@@ -356,7 +358,7 @@ movie_pred<-movie_pred_cosine
 movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
 mae(movie_UI_test,movie_pred)
 ```
-#### mean-square difference Correlation
+#### Mean-square Difference Correlation
 ```{r}
 # Rank of Score for Web
 MS_pred<-MS_pred_msd
@@ -452,7 +454,7 @@ movie_pred<-movie_pred_cosine_z_score
 movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
 mae(movie_UI_test,movie_pred)
 ```
-#### mean-square difference Correlation
+#### Mean-square Difference Correlation
 ```{r}
 # Rank of Score for Web
 MS_pred<-MS_pred_msd_zscore
