@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Libraries & Reading In Data
 ```{r}
-source("./lib/functions.R")
+source("../lib/functions.R")
 setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
 ```
 
@@ -96,6 +96,26 @@ load(ms_test.Rdata)
 
 # Predictions
 ```{r}
+source("../lib/model_preds.R")
+
+for(i in 1:nitems){
+    movie_train[ ,i] <- em_pred(movie_UI, gamma, sft, cl = 12, rng)
+}
+
+NAs <- which(!is.na(movie_test))
+
+# calculate MAE 
+mae <- sum(abs(preds[NAs] - movie_test[NAs]))/length(NAs)
+
+
+## testing below
+nitems <- dim(movie_UI)[2]
+nusers <- dim(movie_UI)[1]
+
+gamma <- array(1/6, dim = c(nitems, 12, 6))
+sft <- matrix(0, nrow = nusers, ncol = 12)
+sft[ ,6] <- rep(1, nusers)
+rng <- 1:6
 
 
 ```
