@@ -1,6 +1,6 @@
 ---
 title: "main"
-author: "all our names here"
+author: "group 6"
 date: "4/8/2018"
 output: html_document
 ---
@@ -248,6 +248,8 @@ save(movie_pred_entropy_zscore, file = "../output/movie_pred_entropy_zscore
      .RData")
 ```
 
+<<<<<<< HEAD
+=======
 ## EM Algorithm
 ```{r}
 # load gamma
@@ -294,7 +296,23 @@ for (i in nrow(notNAs)){
   
 }
 
+<<<<<<< HEAD
+=======
+## testing below
+# nitems <- dim(movie_UI)[2]
+# nusers <- dim(movie_UI)[1]
+# 
+# gamma <- array(1/6, dim = c(6, nitems, 12))
+# sft <- matrix(0, nrow = nusers, ncol = 12)
+# sft[ ,6] <- rep(1, nusers)
+# rng <- 1:6
+
+#ms dataset 
+
+
+>>>>>>> d99ac54ecf9a0309684242511fb0b70780d88913
 ```
+>>>>>>> 9a2aeaa271b5bcb4b4238e216923e035689906da
 
 ## Evaluation
 ### Load prediction data
@@ -326,21 +344,15 @@ load("../output/MS_pred_pearson.RData")
 #### Pearson Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_pearson
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
-rank_score_pearson = rank_score(MS_test,MS_pred)
+MS_pred <- MS_pred_pearson
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
+rank_score_pearson = rank_score(MS_test, MS_pred)
 rank_score_pearson
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_pearson
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_pearson
+movie_pred <- movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Spearman Correlation
 ```{r}
@@ -349,169 +361,115 @@ MS_pred<-MS_pred_spearman
 MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
 rank_score_spearman = rank_score(MS_test,MS_pred)
 rank_score_spearman
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_spearman
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
+movie_pred <- movie_pred_spearman
+movie_pred <- movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
 mae(movie_UI_test,movie_pred)
 ```
 #### Cosine Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_cosine
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
+MS_pred <- MS_pred_cosine
+MS_pred <- MS_pred[rownames(MS_test),colnames(MS_test)]
 rank_score_cosine = rank_score(MS_test,MS_pred)
 rank_score_cosine
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_cosine
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
+movie_pred <- movie_pred_cosine
+movie_pred <- movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
 mae(movie_UI_test,movie_pred)
 ```
 #### Mean-square Difference Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_msd
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
-rank_score_msd = rank_score(MS_test,MS_pred)
+MS_pred <- MS_pred_msd
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
+rank_score_msd = rank_score(MS_test, MS_pred)
 rank_score_msd
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_msd
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_msd
+movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Entropy Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_entropy
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
-rank_score_entropy = rank_score(MS_test,MS_pred)
+MS_pred <- MS_pred_entropy
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
+rank_score_entropy = rank_score(MS_test, MS_pred)
 rank_score_entropy
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_entropy
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_entropy
+movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 ### Z-score Memory-based Model
 #### Pearson Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_pearson_zscore
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
+MS_pred <- MS_pred_pearson_zscore
+MS_pred <- MS_pred[rownames(MS_test),colnames(MS_test)]
 rank_score_pearson_zscore = rank_score(MS_test,MS_pred)
 rank_score_pearson_zscore
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_pearson_zscore
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_pearson_zscore
+movie_pred <- movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Spearman Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_spearman_zscore
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
+MS_pred <- MS_pred_spearman_zscore
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
 rank_score_spearman_zscore = rank_score(MS_test,MS_pred)
 rank_score_spearman_zscore
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_spearman_z_score
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_spearman_z_score
+movie_pred <- movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Cosine Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_cosine_zscore
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
+MS_pred <- MS_pred_cosine_zscore
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
 rank_score_cosine_zscore = rank_score(MS_test,MS_pred)
 rank_score_cosine_zscore
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_cosine_z_score
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_cosine_z_score
+movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Mean-square Difference Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_msd_zscore
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
-rank_score_msd_zscore = rank_score(MS_test,MS_pred)
+MS_pred <- MS_pred_msd_zscore
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
+rank_score_msd_zscore = rank_score(MS_test, MS_pred)
 rank_score_msd_zscore
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_msd_zscore
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_msd_zscore
+movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 #### Entropy Correlation
 ```{r}
 # Rank of Score for Web
-MS_pred<-MS_pred_entropy_zscore
-MS_pred<-MS_pred[rownames(MS_test),colnames(MS_test)]
-rank_score_entropy_zscore = rank_score(MS_test,MS_pred)
+MS_pred <- MS_pred_entropy_zscore
+MS_pred <- MS_pred[rownames(MS_test), colnames(MS_test)]
+rank_score_entropy_zscore = rank_score(MS_test, MS_pred)
 rank_score_entropy_zscore
-# Web Accuracy 
-# percent of vroot user visit in test data
-sum(MS_test)/(dim(MS_test)[1]*dim(MS_test)[2])
-# percent of vroot user visit in pred data
-sum(MS_pred)/(dim(MS_pred)[1]*dim(MS_pred)[2])
-# percent of vroot that the model predict and the user actually visit
-sum((MS_test==MS_pred) & (MS_test==1))/sum(MS_test==1)
+
 # MAE for Movie
-movie_pred<-movie_pred_entropy_zscore
-movie_pred<-movie_pred[rownames(movie_UI_test),colnames(movie_UI_test)]
-mae(movie_UI_test,movie_pred)
+movie_pred <- movie_pred_entropy_zscore
+movie_pred <- movie_pred[rownames(movie_UI_test), colnames(movie_UI_test)]
+mae(movie_UI_test, movie_pred)
 ```
 
