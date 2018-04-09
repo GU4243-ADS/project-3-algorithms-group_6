@@ -49,8 +49,6 @@ save(weight_entropy_MS_train, file = 'weight_entropy_MS_train.RData')
 ```
 ```{r}
 weight_entropy_movie_train <- calc_weight(movie_UI, method = 'entropy')
-```
-```{r}
 save(weight_entropy_movie_train, file = 'weight_entropy_movie_train.RData')
 ```
 ### Calculate mean-square difference correlation
@@ -58,6 +56,117 @@ save(weight_entropy_movie_train, file = 'weight_entropy_movie_train.RData')
 weight_msd_MS_train <- calc_weight(MS_UI, method = 'msd')
 save(weight_msd_MS_train, file = 'weight_msd_MS_train.RData')
 ```
+```{r}
 weight_msd_movie_train <- calc_weight(movie_UI, method = 'msd')
 save(weight_msd_movie_train, file = 'weight_msd_movie_train.RData')
+```
+## Prediction
+### Load similarity weights
+```{r}
+load("../output/weight_pearson_MS_train.RData")
+load("../output/weight_pearson_movie_train.RData")
+load("../output/weight_spearman_MS_train.RData")
+load("../output/weight_spearman_movie_train.RData")
+load("../output/weight_cosine_MS_train.RData")
+load("../output/weight_cosine_movie_train.RData")
+load("../output/weight_entropy_MS_train.RData")
+load("../output/weight_entropy_movie_train.RData")
+load("../output/weight_msd_MS_train.RData")
+load("../output/weight_msd_movie_train.Rdata")
+load("../output/weight_cosine_MS_train.RData")
+```
+
+### Original Prediction
+#### With Pearson correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_pearson <- pred_matrix(MS_UI, weight_pearson_MS_train)
+save(MS_pred_pearson, file = "../output/MS_pred_pearson.RData")
+
+movie_pred_pearson <- pred_matrix(movie_UI, weight_pearson_movie_train)
+save(movie_pred_pearson, file = "../output/movie_pred_pearson.RData")
+```
+#### With Spearman correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_spearman <- pred_matrix(MS_UI, weight_spearman_MS_train)
+save(MS_pred_spearman, file = "../output/MS_pred_spearman.RData")
+
+movie_pred_spearman <- pred_matrix(movie_UI, weight_spearman_movie_train)
+save(movie_pred_spearman, file = "../output/movie_pred_spearman.RData")
+```
+#### With Cosine correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_cosine <- pred_matrix(MS_UI, weight_cosine_MS_train)
+save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
+
+movie_pred_cosine <- pred_matrix(movie_UI, weight_cosine_movie_train)
+save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
+```
+#### With mean-square difference correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_msd <- pred_matrix(MS_UI, weight_msd_MS_train)
+save(MS_pred_msd, file = "../output/MS_pred_msd.RData")
+
+movie_pred_msd <- pred_matrix(movie_UI, weight_msd_movie_train)
+save(movie_pred_msd, file = "../output/movie_pred_msd.RData")
+```
+#### With Entropy correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_entropy <- pred_matrix(MS_UI, weight_entropy_MS_train)
+save(MS_pred_entropy, file = "../output/MS_pred_entropy.RData")
+
+movie_pred_entropy <- pred_matrix(movie_UI, weight_entropy_movie_train)
+save(movie_pred_entropy, file = "../output/movie_pred_entropy.RData")
+```
+
+### Z-Score Prediction
+#### With Pearson correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_pearson <- pred_z_score_matrix(MS_UI, weight_pearson_MS_train)
+save(MS_pred_pearson, file = "../output/MS_pred_pearson.RData")
+
+movie_pred_pearson <- pred_z_score_matrix(movie_UI, weight_pearson_movie_train)
+save(movie_pred_pearson, file = "../output/movie_pred_pearson.RData")
+```
+#### With Spearman correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_spearman <- pred_z_score_matrix(MS_UI, weight_spearman_MS_train)
+save(MS_pred_spearman, file = "../output/MS_pred_spearman.RData")
+
+movie_pred_spearman <- pred_z_score_matrix(movie_UI, weight_spearman_movie_train)
+save(movie_pred_spearman, file = "../output/movie_pred_spearman.RData")
+```
+#### With Cosine correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_cosine <- pred_z_score_matrix(MS_UI, weight_cosine_MS_train)
+save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
+
+movie_pred_cosine <- pred_z_score_matrix(movie_UI, weight_cosine_movie_train)
+save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
+```
+#### With mean-square difference correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_msd_zscore <- pred_z_score_matrix(MS_UI, weight_msd_MS_train)
+save(MS_pred_msd_zscore, file = "../output/MS_pred_msd_zscore.RData")
+
+movie_pred_msd_zscore <- pred_z_score_matrix(movie_UI, weight_msd_movie_train)
+save(movie_pred_msd_zscore, file = "../output/movie_pred_msd_zscore.RData")
+```
+#### With Entropy correlation
+```{r web predict}
+# Calculate predictions for MS
+MS_pred_entropy_zscore <- pred_z_score_matrix(MS_UI, weight_entropy_MS_train)
+save(MS_pred_entropy_zscore, file = "../output/MS_pred_entropy_zscore.RData")
+
+movie_pred_entropy_zscore <- pred_z_score_matrix(movie_UI, weight_entropy_movie_train)
+save(movie_pred_entropy_zscore, file = "../output/movie_pred_entropy_zscore
+     .RData")
 ```
