@@ -249,7 +249,7 @@ rank_score <- function(test,pred){
 
 
 ## Model-based Predictions Functions
-em_pred <- function(train_data, gamma, sft_assn, cl, rng){
+em_pred <- function(train_data, gamma, mu, cl, rng){
   nitems <- dim(train_data)[2]
   nusers <- dim(train_data)[1]
   # NAs to 0's
@@ -264,7 +264,7 @@ em_pred <- function(train_data, gamma, sft_assn, cl, rng){
 # looping through range of score and clusters to get prediction matrix 
   for (k in rng){
     for(i in 1:cl){
-      preds <- preds + k*cluster %*% t(gamma[k,,cl]) 
+      preds <- preds + k*cluster %*% t(gamma[,k,cl]) 
       # multiplied by the probability that its in that cluster and it has that rank. 
     }
   }

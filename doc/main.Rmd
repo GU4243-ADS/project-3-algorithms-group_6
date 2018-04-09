@@ -250,8 +250,38 @@ save(movie_pred_entropy_zscore, file = "../output/movie_pred_entropy_zscore
 
 ## EM Algorithm
 ```{r}
+# load gamma
+if(!require('RcppCNPy')){
+  install.packages('RcppCNPy')
+}
+
+gamma0 <- npyLoad("../output/10gammas/gamma0.npy")
+gamma1 <- npyLoad("../output/10gammas/gamma1.npy")
+gamma2 <- npyLoad("../output/10gammas/gamma2.npy")
+gamma3 <- npyLoad("../output/10gammas/gamma3.npy")
+gamma4 <- npyLoad("../output/10gammas/gamma4.npy")
+gamma5 <- npyLoad("../output/10gammas/gamma5.npy")
+gamma6 <- npyLoad("../output/10gammas/gamma6.npy")
+gamma7 <- npyLoad("../output/10gammas/gamma7.npy")
+gamma8 <- npyLoad("../output/10gammas/gamma8.npy")
+gamma9 <- npyLoad("../output/10gammas/gamma9.npy")
+gamma <- array(0, dim = c(1619, 6, 10))
+gamma[,,1] <- gamma0
+gamma[,,2] <- gamma1
+gamma[,,3] <- gamma2
+gamma[,,4] <- gamma3
+gamma[,,5] <- gamma4
+gamma[,,6] <- gamma5
+gamma[,,7] <- gamma6
+gamma[,,8] <- gamma7
+gamma[,,9] <- gamma8
+gamma[,,10] <- gamma9
+
+#load mu
+mu <- npyLoad("../output/mu.npy")
+
 # movie data
-em_pred(movie_UI, gamma, sft, cl = 12, rng)
+em_pred(movie_UI, gamma, mu, cl = 10, rng)
 
 notNAs <- which(!is.na(movie_UI_test), TRUE)
 load("../data/cluster_prediction.RData")
