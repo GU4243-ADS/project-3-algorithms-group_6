@@ -296,23 +296,8 @@ for (i in nrow(notNAs)){
   
 }
 
-<<<<<<< HEAD
-=======
-## testing below
-# nitems <- dim(movie_UI)[2]
-# nusers <- dim(movie_UI)[1]
-# 
-# gamma <- array(1/6, dim = c(6, nitems, 12))
-# sft <- matrix(0, nrow = nusers, ncol = 12)
-# sft[ ,6] <- rep(1, nusers)
-# rng <- 1:6
-
-#ms dataset 
-
-
->>>>>>> d99ac54ecf9a0309684242511fb0b70780d88913
 ```
->>>>>>> 9a2aeaa271b5bcb4b4238e216923e035689906da
+
 
 ## Evaluation
 ### Load prediction data
