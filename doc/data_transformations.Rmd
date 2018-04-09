@@ -5,6 +5,8 @@ output: html_notebook
 
 ### MS Data
 ```{r reading ms data, eval = FALSE}
+source("../lib/functions.R")
+setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
 
 # Load the data
 MS_train <- read.csv("../data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
@@ -29,9 +31,9 @@ write.csv(MS_test, "ms_test.csv")
 ### Movie Data
 ```{r reading movie data, eval = FALSE}
 # Load the data from csv and write to Rdata
-movie_train <- read.csv("./Proj3_Data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
+movie_train <- read.csv("../data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
 movie_train <- movie_train[, 2:4]
-movie_test <- read.csv("./Proj3_Data/eachmovie_sample/data_test.csv", as.is = TRUE, header = TRUE)
+movie_test <- read.csv("../data/eachmovie_sample/data_test.csv", as.is = TRUE, header = TRUE)
 movie_test <- movie_test[, 2:4]
 
 users  <- sort(unique(movie_train$User))
@@ -50,9 +52,10 @@ ord     <- order(movies)
 movies  <- movies[ord]
 ratings <- ratings[ord]
 
-system.time(UI[1, colnames(UI) %in% movies] <- ratings)
+# find time it takes
+#system.time(UI[1, colnames(UI) %in% movies] <- ratings)
 
-total_ratings <- rowSums(movie_UI, na.rm = TRUE)
+total_ratings <- rowSums(movie_train, na.rm = TRUE)
 
 # Compute the full matrix
 # save to Rdata and csvs 
