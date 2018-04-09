@@ -15,7 +15,7 @@ Term: Spring 2018
 + Team Members: David Arredondo, Sophie Beiers, Huijun Cui,	Richard Shin, Shan Zhong
 + Project summary: We used memory based and model based collaborative filtering to make predictions on a user's rating of an item.
 
-Contribution statement: All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. David Arredondo wrote the EM algorithm, and made the slide explaining it. Sophie Beiers wrote the prediction algorithm for the EM algorithm, ran data transformations, organized the main.Rmd and GitHub, and made presentation. 
+Contribution statement: All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. David Arredondo wrote the EM algorithm, and made the slide explaining it. Sophie Beiers wrote the prediction algorithm for the EM algorithm, ran data transformations, organized the main.Rmd and GitHub, and made presentation. Richard Shin wrote the similarity weight function in functions.R and helped write the prediction algorithm for EM step.
 
 
 # Collaborative Filtering
