@@ -12,20 +12,20 @@ Term: Spring 2018
 
 + Project title: Algorithms
 + Team Number: 6
-+ Team Members: David Arredondo, Sophie Beiers, Huijun Cui,	Richard Shin, Shan Zhong,
-+ Project summary: We used memory based and model based collaboritve filtering to make predictions on a user's rating of an item. 
++ Team Members: David Arredondo, Sophie Beiers, Huijun Cui,	Richard Shin, Shan Zhong
++ Project summary: We used memory based and model based collaborative filtering to make predictions on a user's rating of an item.
 
-Contribution statement: All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. David Arredondo wrote the EM algorithm, and made the slide explaining it.
+Contribution statement: All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. David Arredondo wrote the EM algorithm, and made the slide explaining it. Sophie Beiers wrote the prediction algorithm for the EM algorithm, ran data transformations, organized the main.Rmd and GitHub, and made presentation. 
 
 
 # Collaborative Filtering
 
 ### Introduction
 
-Many online sites rely on recommendation systems to better target their user with ads, information or products that their user may enjoy. Collaborative filtering is one such way to better recommend items to a particular user; by searching for other users who have similar interests, algorithms are able to make more accurate suggestions and recommendations. 
+Many online sites rely on recommendation systems to better target their user with ads, information or products that their user may enjoy. Collaborative filtering is one such way to better recommend items to a particular user; by searching for other users who have similar interests, algorithms are able to make more accurate suggestions and recommendations.
 
 
-For this project, we utilized memory-based and model-based algorithms to generate predictions for two datasets: Microsoft Web Data and EachMovie data. 
+For this project, we utilized memory-based and model-based algorithms to generate predictions for two datasets: Microsoft Web Data and EachMovie data.
 
 ### Memory Based Approach
 
