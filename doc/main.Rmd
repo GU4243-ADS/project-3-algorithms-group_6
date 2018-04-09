@@ -10,81 +10,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Libraries & Reading In Data
+
 ```{r}
 source("../lib/functions.R")
 setwd("~/Documents/GitHub/project-3-algorithms-group_6/doc")
 ```
-
-### MS Data
-```{r reading ms data, eval = FALSE}
-
-# Load the data
-MS_train <- read.csv("../data/MS_sample/data_train.csv", as.is = TRUE, header = TRUE)
-MS_train <- MS_train[, 2:4]
-
-MS_test <- read.csv("../data/MS_sample/data_test.csv", as.is = TRUE, header = TRUE)
-MS_test <- MS_test[, 2:4]
-
-
-# Transform from narrow to wide, i.e. user-item matrix 
-# using MS_data_transform function & save to Rdata and csvs. 
-
-MS_train <- MS_data_transform(MS_train)
-save(MS_train, file = "MS_UI.RData")
-write.csv(MS_train, "ms_train.csv")
-
-MS_test <- MS_data_transform(MS_test)
-save(MS_test, file = "MS_UI_test.RData")
-write.csv(MS_test, "ms_test.csv")
-```
-
-### Movie Data
-```{r reading movie data, eval = FALSE}
-# Load the data from csv and write to Rdata
-movie_train <- read.csv("./Proj3_Data/eachmovie_sample/data_train.csv", as.is = TRUE, header = TRUE)
-movie_train <- movie_train[, 2:4]
-movie_test <- read.csv("./Proj3_Data/eachmovie_sample/data_test.csv", as.is = TRUE, header = TRUE)
-movie_test <- movie_test[, 2:4]
-
-users  <- sort(unique(movie_train$User))
-movies <- sort(unique(movie_train$Movie))
-
-# initialize UI matrix
-UI            <- matrix(NA, nrow = length(users), ncol = length(movies))
-row.names(UI) <- users
-colnames(UI)  <- movies
-
-# We consider just user 1, finding user 1's movies and ratings
-movies  <- movie_train$Movie[movie_train$User == users[1]]
-ratings <- movie_train$Score[movie_train$User == users[1]]
-
-ord     <- order(movies)
-movies  <- movies[ord]
-ratings <- ratings[ord]
-
-system.time(UI[1, colnames(UI) %in% movies] <- ratings)
-
-total_ratings <- rowSums(movie_UI, na.rm = TRUE)
-
-# Compute the full matrix
-# save to Rdata and csvs 
-movie_train <- movie_data_transform(movie_train)
-save(movie_train, file = "movie_train.RData")
-write.csv(movie_train, "../data/movie_train.csv")
-
-movie_test <- movie_data_transform(movie_test)
-save(movie_test, file = "movie_test.RData")
-write.csv(movie_test, "../data/movie_test.csv")
-```
+Please see `data_transformations.Rmd` in the docs folder for code that transformed and manipulated dataset into RData/csvs. 
 
 ### Loading Data
 ```{r load data}
 # load training and testing Rdata sets
 # even though they are named nicely here, we stil refer to them as movie_UI etc. below. They are loading with those names, strangely. 
-load("../data/movie_train.RData")
-load("../data/movie_test.RData")
-load("../data/MS_train.RData")
-load("../data/MS_test.RData")
+load("../data/movie_train.RData") # movie_UI
+load("../data/movie_test.RData") # movie_UI_test
+load("../data/MS_train.RData") # MS_UI
+load("../data/MS_test.RData") #MS_test
 ```
 
 # Models 
