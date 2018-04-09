@@ -80,10 +80,10 @@ write.csv(movie_test, "../data/movie_test.csv")
 ### Loading Data
 ```{r load data}
 # load training and testing Rdata sets
-load(movie_train.Rdata)
-load(movie_test.Rdata)
-load(ms_train.Rdata)
-load(ms_test.Rdata)
+load("../data/movie_train.RData")
+load("../data/movie_test.RData")
+load("../data/MS_train.RData")
+load("../data/MS_test.RData")
 ```
 
 # Models 
@@ -95,27 +95,36 @@ load(ms_test.Rdata)
 
 
 # Predictions
-```{r}
-source("../lib/model_preds.R")
+### Memory Based Algorithm
 
-for(i in 1:nitems){
-    movie_train[ ,i] <- em_pred(movie_UI, gamma, sft, cl = 12, rng)
+
+
+### EM Algorithm
+```{r}
+# movie data
+source("../lib/model_preds.R")
+em_pred(movie_UI, gamma, sft, cl = 12, rng)
+
+notNAs <- which(!is.na(movie_UI_test), TRUE)
+load("../data/cluster_prediction.RData")
+
+mae <- 0
+# calculate MAE 
+for (i in nrow(notNAs)){
+    mae <- mae + sum(abs(preds[notNAs[i,1], notNAs[i,2]] - movie_UI_test[notNAs[i,1], notNAs[i,2]]))/nrow(notNAs)
+  
 }
 
-NAs <- which(!is.na(movie_test))
-
-# calculate MAE 
-mae <- sum(abs(preds[NAs] - movie_test[NAs]))/length(NAs)
-
-
 ## testing below
-nitems <- dim(movie_UI)[2]
-nusers <- dim(movie_UI)[1]
+# nitems <- dim(movie_UI)[2]
+# nusers <- dim(movie_UI)[1]
+# 
+# gamma <- array(1/6, dim = c(6, nitems, 12))
+# sft <- matrix(0, nrow = nusers, ncol = 12)
+# sft[ ,6] <- rep(1, nusers)
+# rng <- 1:6
 
-gamma <- array(1/6, dim = c(nitems, 12, 6))
-sft <- matrix(0, nrow = nusers, ncol = 12)
-sft[ ,6] <- rep(1, nusers)
-rng <- 1:6
+#ms dataset 
 
 
 ```
