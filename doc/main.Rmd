@@ -4,12 +4,13 @@ author: "group 6"
 date: "4/8/2018"
 output: html_document
 ---
+# Algorithms: Project 3, Group 6
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Libraries & Reading In Data
+## Reading In Data & Sourcing Functions 
 
 ```{r}
 source("../lib/functions.R")
