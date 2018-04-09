@@ -1,12 +1,6 @@
-###################################################################
-### Memory-based Collaborative Filtering Algorithm Starter Code ###
-###################################################################
+#### Model and Memory-based Algorithm Functions ####
 
-### Authors: CIndy Rush
-### Project 3
-### ADS Spring 2018
-
-
+# Data transform function (by Cindy Rush)
 MS_data_transform <- function(MS) {
   
   ## Calculate UI matrix for Microsoft data
@@ -86,9 +80,7 @@ movie_data_transform <- function(movie) {
 
 
 
-
-
-
+## Memory-based Model Calculations 
 calc_weight <- function(data, method = "pearson") {
   
   ## Calculate similarity weight matrix
@@ -125,11 +117,15 @@ calc_weight <- function(data, method = "pearson") {
         }
         return(cosine(rowA[joint_values],rowB[joint_values]))
       }
-      # else if (method = 'entropy'){
-      #   if(!require("entropy")){
-      #     install.packages("entropy")
-      #   }
-      # }
+      else if (method == 'entropy'){
+        if(!require("infotheo")){
+          install.packages("infotheo")
+        }
+        return(1-condentropy(rowA[joint_values], rowB[joint_values]))
+      }
+      else if (method =='msd'){
+        return(1-mean((rowA[joint_values] - rowB[joint_values])^2))
+      }
     }
   }
   
@@ -142,10 +138,7 @@ calc_weight <- function(data, method = "pearson") {
 }
 
 
-
-
-
-
+## Memory-based model prediction matrix
 pred_matrix <- function(data, simweights) {
   
   ## Calculate prediction matrix
@@ -183,5 +176,100 @@ pred_matrix <- function(data, simweights) {
   }
   
   return(pred_mat)
+}
+
+
+# z score (rating normalization)
+pred_z_score_matrix <- function(data, simweights) {
+  
+  ## Calculate prediction matrix
+  ##
+  ## input: data   - movie data or MS data in user-item matrix form
+  ##        simweights - a matrix of similarity weights
+  ##
+  ## output: prediction matrix
+  
+  # Initiate the prediction matrix.
+  pred_mat <- data
+  
+  # Change MS entries from 0 to NA
+  pred_mat[pred_mat == 0] <- NA
+  
+  row_avgs <- apply(data, 1, mean, na.rm = TRUE)
+  
+  row_devs <- apply(data, 1, sd, na.rm = TRUE)
+  
+  for(i in 1:nrow(data)) {
+    
+    # Find columns we need to predict for user i and sim weights for user i
+    cols_to_predict <- which(is.na(pred_mat[i, ]))
+    num_cols        <- length(cols_to_predict)
+    neighb_weights  <- simweights[i, ]
+    
+    # Transform the UI matrix into a deviation matrix since we want to calculate
+    # weighted averages of the deviations
+    
+    dev_mat     <- (data - matrix(rep(row_avgs, ncol(data)), ncol = ncol(data)))/(matrix(rep(row_devs, ncol(data)), ncol = ncol(data)))
+    weight_mat  <- matrix(rep(neighb_weights, ncol(data)), ncol = ncol(data))
+    
+    weight_sub <- weight_mat[, cols_to_predict]
+    dev_sub    <- dev_mat[ ,cols_to_predict]
+    
+    pred_mat[i, cols_to_predict] <- row_avgs[i] +  row_devs[i] * apply(dev_sub * weight_sub, 2, sum, na.rm = TRUE)/sum(neighb_weights, na.rm = TRUE)
+    print(i)
+  }
+  
+  return(pred_mat)
+}
+
+
+mae <- function(test,prediction){
+  mae <- mean(abs(test-prediction), na.rm = T)
+  return(mae)
+}
+
+## Rank Score
+rank_score <- function(test,pred){
+  d <- 0
+  rank_pred <- ncol(pred)+1-t(apply(pred,1,function(x){return(rank(x,ties.method = 'first'))}))
+  rank_test <- ncol(test)+1-t(apply(test,1,function(x){return(rank(x,ties.method = 'first'))}))
+  top <- test-d ; top[top<0]<-0
+  alpha<-apply(pred>0.5,1,sum)
+  alpha_matrix<-matrix(rep(alpha, ncol(rank_pred)), ncol = ncol(rank_pred))
+  
+  alpha_test<-apply(test>0.5,1,sum)
+  alpha_test_matrix<-matrix(rep(alpha_test, ncol(rank_test)), ncol = ncol(rank_test))
+  
+  R_a<-apply(top/(2^((rank_pred-1)/(alpha_matrix-1))) ,1,sum)
+  R_max<-apply(top/(2^((rank_test-1)/(alpha_test_matrix-1))) ,1,sum)
+  
+  R <- 100*sum(R_a,na.rm=TRUE)/sum(R_max,na.rm=TRUE)
+  return(R)
+}
+
+
+## Model-based Predictions Functions
+em_pred <- function(train_data, gamma, sft_assn, cl, rng){
+  nitems <- dim(train_data)[2]
+  nusers <- dim(train_data)[1]
+  # NAs to 0's
+  train_data[is.na(train_data)] <- 0
+  # assign user cluster based on highest prob of being in cluster
+  cluster <- apply(sft_assn, 1, which.max)
+  # initialize prediction matrix
+  preds <- as.data.frame(matrix(0, nrow = nusers, ncol = nitems))
+  #colnames(preds) <- colnames(train_data)
+  #rownames(preds) <- rownames(train_data)
+  
+# looping through range of score and clusters to get prediction matrix 
+  for (k in rng){
+    for(i in 1:cl){
+      preds <- preds + k*cluster %*% t(gamma[k,,cl]) 
+      # multiplied by the probability that its in that cluster and it has that rank. 
+    }
+  }
+  save(preds, file = "../data/cluster_prediction.RData")
+  return(preds)
+  
 }
 
