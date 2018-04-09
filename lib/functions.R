@@ -239,3 +239,21 @@ mae <- function(test,prediction){
   return(mae)
 }
 
+## Rank Score
+rank_score <- function(test,pred){
+  d <- 0
+  rank_pred <- ncol(pred)+1-t(apply(pred,1,function(x){return(rank(x,ties.method = 'first'))}))
+  rank_test <- ncol(test)+1-t(apply(test,1,function(x){return(rank(x,ties.method = 'first'))}))
+  top <- test-d ; top[top<0]<-0
+  alpha<-apply(pred>0.5,1,sum)
+  alpha_matrix<-matrix(rep(alpha, ncol(rank_pred)), ncol = ncol(rank_pred))
+  
+  alpha_test<-apply(test>0.5,1,sum)
+  alpha_test_matrix<-matrix(rep(alpha_test, ncol(rank_test)), ncol = ncol(rank_test))
+  
+  R_a<-apply(top/(2^((rank_pred-1)/(alpha_matrix-1))) ,1,sum)
+  R_max<-apply(top/(2^((rank_test-1)/(alpha_test_matrix-1))) ,1,sum)
+  
+  R <- 100*sum(R_a,na.rm=TRUE)/sum(R_max,na.rm=TRUE)
+  return(R)
+}
