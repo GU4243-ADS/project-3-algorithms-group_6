@@ -1,12 +1,6 @@
-###################################################################
-### Memory-based Collaborative Filtering Algorithm Starter Code ###
-###################################################################
+#### Model and Memory-based Algorithm Functions ####
 
-### Authors: CIndy Rush
-### Project 3
-### ADS Spring 2018
-
-
+# Data transform function (by Cindy Rush)
 MS_data_transform <- function(MS) {
   
   ## Calculate UI matrix for Microsoft data
@@ -86,9 +80,7 @@ movie_data_transform <- function(movie) {
 
 
 
-
-
-
+## Memory-based Model Calculations 
 calc_weight <- function(data, method = "pearson") {
   
   ## Calculate similarity weight matrix
@@ -146,11 +138,7 @@ calc_weight <- function(data, method = "pearson") {
 }
 
 
-
-
-
-
-
+## Memory-based model prediction matrix
 pred_matrix <- function(data, simweights) {
   
   ## Calculate prediction matrix
@@ -191,7 +179,7 @@ pred_matrix <- function(data, simweights) {
 }
 
 
-# z score!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# z score (rating normalization)
 pred_z_score_matrix <- function(data, simweights) {
   
   ## Calculate prediction matrix
@@ -268,3 +256,30 @@ rank_score <- function(test,pred){
   R <- 100*sum(R_a,na.rm=TRUE)/sum(R_max,na.rm=TRUE)
   return(R)
 }
+
+
+## Model-based Predictions Functions
+em_pred <- function(train_data, gamma, sft_assn, cl, rng){
+  nitems <- dim(train_data)[2]
+  nusers <- dim(train_data)[1]
+  # NAs to 0's
+  train_data[is.na(train_data)] <- 0
+  # assign user cluster based on highest prob of being in cluster
+  cluster <- apply(sft_assn, 1, which.max)
+  # initialize prediction matrix
+  preds <- as.data.frame(matrix(0, nrow = nusers, ncol = nitems))
+  #colnames(preds) <- colnames(train_data)
+  #rownames(preds) <- rownames(train_data)
+  
+# looping through range of score and clusters to get prediction matrix 
+  for (k in rng){
+    for(i in 1:cl){
+      preds <- preds + k*cluster %*% t(gamma[k,,cl]) 
+      # multiplied by the probability that its in that cluster and it has that rank. 
+    }
+  }
+  save(preds, file = "../data/cluster_prediction.RData")
+  return(preds)
+  
+}
+
