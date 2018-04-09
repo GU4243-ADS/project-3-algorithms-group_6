@@ -279,7 +279,7 @@ for (i in nrow(notNAs)){
 ## Evaluation
 ### Load prediction data
 ```{r}
-# Again, MS prediction data are in GitHub repo, but movie weight data are in Google Drive. 
+# Again, MS prediction data are in GitHub repo, but movie prediction data are in Google Drive. 
 # The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
 load("../output/movie_pred_entropy_zscore.RData")
 load("../output/MS_pred_entropy_zscore.RData")
