@@ -138,7 +138,8 @@ The EM algorithm can be found in the python jupyter notebook in the docs folder.
 ## Memory Based Algorithm
 #### Load Similarity Weights
 ```{r}
-# MS weight data are in GitHub repo, but movie weight data are too large to be uploaded to GitHub, so we uploaded them to GoogleDrive. The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
+# MS weight data are in GitHub repo, but movie weight data are too large to be uploaded to GitHub, so we uploaded them to GoogleDrive. 
+# The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
 load("../output/weight_pearson_MS_train.RData")
 load("../output/weight_pearson_movie_train.RData")
 load("../output/weight_spearman_MS_train.RData")
@@ -278,7 +279,8 @@ for (i in nrow(notNAs)){
 ## Evaluation
 ### Load prediction data
 ```{r}
-# Again, MS prediction data are in GitHub repo, but movie weight data are in Google Drive. The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
+# Again, MS prediction data are in GitHub repo, but movie weight data are in Google Drive. 
+# The Google Drive Link is: https://drive.google.com/open?id=1EMPXV5k9NDRp8rNTJtxVmImtkYaH72Pr
 load("../output/movie_pred_entropy_zscore.RData")
 load("../output/MS_pred_entropy_zscore.RData")
 load("../output/movie_pred_msd_zscore.RData")
