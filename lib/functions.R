@@ -234,6 +234,17 @@ pred_z_score_matrix <- function(data, simweights) {
   return(pred_mat)
 }
 
+cal_zscore <- function(weight, train, test){
+  zscore_mat <- matrix(NA, nrow = nrow(test), ncol = ncol(test))
+  for (i in 1:nrow(test)){
+    for (j in 1:ncol(test)){
+      if (!is.na(test[i, j])){
+        zscore[i, j] <- zscore(weight, train, i, j)
+      }
+    }
+  }
+  return (zscore_mat)
+}
 mae <- function(test,prediction){
   mae <- mean(abs(test-prediction), na.rm = T)
   return(mae)
