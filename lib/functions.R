@@ -255,17 +255,21 @@ em_pred <- function(train_data, gamma, mu, cl, rng){
   # NAs to 0's
   train_data[is.na(train_data)] <- 0
   # assign user cluster based on highest prob of being in cluster
-  cluster <- apply(sft_assn, 1, which.max)
   # initialize prediction matrix
   preds <- as.data.frame(matrix(0, nrow = nusers, ncol = nitems))
-  #colnames(preds) <- colnames(train_data)
-  #rownames(preds) <- rownames(train_data)
-  
 # looping through range of score and clusters to get prediction matrix 
-  for (k in rng){
-    for(i in 1:cl){
-      preds <- preds + k*cluster %*% t(gamma[,k,cl]) 
-      # multiplied by the probability that its in that cluster and it has that rank. 
+  for (u in 1:nusers){
+    for (k in 1:rng){
+      for(i in 1:cl){
+        natrain <- train_data
+        natrain[natrain ==0] <- NA
+        prod <- log(sum((gamma[which(!is.na(natrain[u,])),k,i])))
+        pred <- k * mu[i] * gamma[,k,i] * prod / (mu[i]*prod)
+        preds[u,] <- pred
+        if (u%%20 == 0){
+          print(u)
+        }
+      }
     }
   }
   save(preds, file = "../data/cluster_prediction.RData")

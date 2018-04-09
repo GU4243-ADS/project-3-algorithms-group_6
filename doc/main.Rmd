@@ -281,11 +281,11 @@ gamma[,,10] <- gamma9
 mu <- npyLoad("../output/mu.npy")
 
 # movie data
-em_pred(movie_UI, gamma, mu, cl = 10, rng)
+source("../lib/functions.R")
+em_pred(movie_UI, gamma, mu, cl = 10, rng = 6)
 
 notNAs <- which(!is.na(movie_UI_test), TRUE)
 load("../data/cluster_prediction.RData")
-
 
 # calculate MAE 
 mae <- 0
@@ -294,16 +294,6 @@ for (i in nrow(notNAs)){
   
 }
 
-## testing below
-# nitems <- dim(movie_UI)[2]
-# nusers <- dim(movie_UI)[1]
-# 
-# gamma <- array(1/6, dim = c(6, nitems, 12))
-# sft <- matrix(0, nrow = nusers, ncol = 12)
-# sft[ ,6] <- rep(1, nusers)
-# rng <- 1:6
-
-#ms dataset 
 ```
 
 ## Evaluation
