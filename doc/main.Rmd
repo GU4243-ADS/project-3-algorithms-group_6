@@ -32,43 +32,83 @@ load("../data/MS_test.RData") #MS_test
 ## Memory-based Models 
 ### Pearson Correlation
 ```{r}
+timestart<-Sys.time()   
 weight_pearson_MS_train <- calc_weight(MS_UI, method = 'pearson')
+timeend<-Sys.time()
+runningtime_MSpearsonweight<-timeend-timestart
+print(runningtime_MSpearsonweight) 
 save(weight_pearson_MS_train, file = 'weight_pearson_MS_train.RData')
 
+timestart<-Sys.time()   
 weight_pearson_movie_train <- calc_weight(movie_UI, method = 'pearson')
+timeend<-Sys.time()
+runningtime_moviepearsonweight<-timeend-timestart
+print(runningtime_moviepearsonweight) 
 save(weight_pearson_movie_train, file = 'weight_pearson_movie_train.RData')
 ```
 ### Spearman Correlation
 ```{r}
+timestart<-Sys.time()   
 weight_spearman_MS_train <- calc_weight(MS_UI, method = 'spearman')
+timeend<-Sys.time()
+runningtime_MSspearmanweight<-timeend-timestart
+print(runningtime_MSspearmanweight) 
 save(weight_spearman_MS_train, file = 'weight_spearman_MS_train.RData')
 
+timestart<-Sys.time()  
 weight_spearman_movie_train <- calc_weight(movie_UI, method = 'spearman')
+timeend<-Sys.time()
+runningtime_moviespearmanweight<-timeend-timestart
+print(runningtime_moviespearmanweight) 
 save(weight_spearman_movie_train, file = 'weight_spearman_movie_train.RData')
 ```
 ### Cosine 
 ```{r}
+timestart<-Sys.time()   
 weight_cosine_MS_train <- calc_weight(MS_UI, method = 'cosine')
+timeend<-Sys.time()
+runningtime_MScosineweight<-timeend-timestart
+print(runningtime_MScosineweight) 
 save(weight_cosine_MS_train, file = 'weight_cosine_MS_train.RData')
 
+timestart<-Sys.time()  
 weight_cosine_movie_train <- calc_weight(movie_UI, method = 'cosine')
+timeend<-Sys.time()
+runningtime_moviecosineweight<-timeend-timestart
+print(runningtime_moviecosineweight) 
 save(weight_cosine_movie_train, file = 'weight_cosine_movie_train.RData')
 ```
 ### Entropy 
 ```{r}
+timestart<-Sys.time() 
 weight_entropy_MS_train <- calc_weight(MS_UI, method = 'entropy')
+timeend<-Sys.time()
+runningtime_MSentropyweight<-timeend-timestart
+print(runningtime_MSentropyweight) 
 save(weight_entropy_MS_train, file = 'weight_entropy_MS_train.RData')
 
+timestart<-Sys.time() 
 weight_entropy_movie_train <- calc_weight(movie_UI, method = 'entropy')
+timeend<-Sys.time()
+runningtime_movieentropyweight<-timeend-timestart
+print(runningtime_movieentropyweight) 
 save(weight_entropy_movie_train, file = 'weight_entropy_movie_train.RData')
 ```
 
 ### Mean Squared Difference
 ```{r}
+timestart<-Sys.time()
 weight_msd_MS_train <- calc_weight(MS_UI, method = 'msd')
+timeend<-Sys.time()
+runningtime_MSmsdweight<-timeend-timestart
+print(runningtime_MSmsdweight) 
 save(weight_msd_MS_train, file = 'weight_msd_MS_train.RData')
 
+timestart<-Sys.time()
 weight_msd_movie_train <- calc_weight(movie_UI, method = 'msd')
+timeend<-Sys.time()
+runningtime_moviemsdweight<-timeend-timestart
+print(runningtime_moviemsdweight) 
 save(weight_msd_movie_train, file = 'weight_msd_movie_train.RData')
 ```
 
@@ -98,46 +138,91 @@ load("../output/weight_cosine_MS_train.RData")
 #### With Pearson 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_pearson <- pred_matrix(MS_UI, weight_pearson_MS_train)
+timeend<-Sys.time()
+runningtime_MSpearsonpred<-timeend-timestart
+print(runningtime_MSpearsonpred) 
 save(MS_pred_pearson, file = "../output/MS_pred_pearson.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_pearson <- pred_matrix(movie_UI, weight_pearson_movie_train)
+timeend<-Sys.time()
+runningtime_moviepearsonpred<-timeend-timestart
+print(runningtime_moviepearsonpred) 
 save(movie_pred_pearson, file = "../output/movie_pred_pearson.RData")
 ```
 #### With Spearman 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_spearman <- pred_matrix(MS_UI, weight_spearman_MS_train)
+timeend<-Sys.time()
+runningtime_MSspearmanpred<-timeend-timestart
+print(runningtime_MSspearmanpred) 
 save(MS_pred_spearman, file = "../output/MS_pred_spearman.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_spearman <- pred_matrix(movie_UI, weight_spearman_movie_train)
+timeend<-Sys.time()
+runningtime_moviespearmanpred<-timeend-timestart
+print(runningtime_moviespearmanpred) 
 save(movie_pred_spearman, file = "../output/movie_pred_spearman.RData")
 ```
 #### With Cosine 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_cosine <- pred_matrix(MS_UI, weight_cosine_MS_train)
+timeend<-Sys.time()
+runningtime_MScosinepred<-timeend-timestart
+print(runningtime_MScosinepred) 
 save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_cosine <- pred_matrix(movie_UI, weight_cosine_movie_train)
+timeend<-Sys.time()
+runningtime_moviecosinenpred<-timeend-timestart
+print(runningtime_moviecosinepred) 
 save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
 ```
 #### With Mean-square Difference 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_msd <- pred_matrix(MS_UI, weight_msd_MS_train)
+timeend<-Sys.time()
+runningtime_MSmsdpred<-timeend-timestart
+print(runningtime_MSmsdpred)
 save(MS_pred_msd, file = "../output/MS_pred_msd.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_msd <- pred_matrix(movie_UI, weight_msd_movie_train)
+timeend<-Sys.time()
+runningtime_moviemsdpred<-timeend-timestart
+print(runningtime_moviemsdpred) 
 save(movie_pred_msd, file = "../output/movie_pred_msd.RData")
 ```
 #### With Entropy 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_entropy <- pred_matrix(MS_UI, weight_entropy_MS_train)
+timeend<-Sys.time()
+runningtime_MSentropypred<-timeend-timestart
+print(runningtime_MSentropypred)
 save(MS_pred_entropy, file = "../output/MS_pred_entropy.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_entropy <- pred_matrix(movie_UI, weight_entropy_movie_train)
+timeend<-Sys.time()
+runningtime_movieentropypred<-timeend-timestart
+print(runningtime_movieentropypred)
 save(movie_pred_entropy, file = "../output/movie_pred_entropy.RData")
 ```
 
@@ -145,46 +230,91 @@ save(movie_pred_entropy, file = "../output/movie_pred_entropy.RData")
 #### With Pearson
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_pearson <- pred_z_score_matrix(MS_UI, weight_pearson_MS_train)
+timeend<-Sys.time()
+runningtime_MSpearsonpred_zscore<-timeend-timestart
+print(runningtime_MSpearsonpred_zscore) 
 save(MS_pred_pearson, file = "../output/MS_pred_pearson.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_pearson <- pred_z_score_matrix(movie_UI, weight_pearson_movie_train)
+timeend<-Sys.time()
+runningtime_moviepearsonpred_zscore<-timeend-timestart
+print(runningtime_moviepearsonpred_zscore) 
 save(movie_pred_pearson, file = "../output/movie_pred_pearson.RData")
 ```
 #### With Spearman 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_spearman <- pred_z_score_matrix(MS_UI, weight_spearman_MS_train)
+timeend<-Sys.time()
+runningtime_MSspearmanpred_zscore<-timeend-timestart
+print(runningtime_MSspearmanpred_zscore_zscore) 
 save(MS_pred_spearman, file = "../output/MS_pred_spearman.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_spearman <- pred_z_score_matrix(movie_UI, weight_spearman_movie_train)
+timeend<-Sys.time()
+runningtime_moviespearmanpred_zscore<-timeend-timestart
+print(runningtime_moviespearmanpred_zscore) 
 save(movie_pred_spearman, file = "../output/movie_pred_spearman.RData")
 ```
 #### With Cosine 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_cosine <- pred_z_score_matrix(MS_UI, weight_cosine_MS_train)
+timeend<-Sys.time()
+runningtime_MScosinepred_zscore<-timeend-timestart
+print(runningtime_MScosinepred_zscore) 
 save(MS_pred_cosine, file = "../output/MS_pred_cosine.RData.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_cosine <- pred_z_score_matrix(movie_UI, weight_cosine_movie_train)
+timeend<-Sys.time()
+runningtime_moviecosinenpred_zscore<-timeend-timestart
+print(runningtime_moviecosinepred_zscore) 
 save(movie_pred_cosine, file = "../output/movie_pred_cosine.RData")
 ```
 #### With Mean-square Difference 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_msd_zscore <- pred_z_score_matrix(MS_UI, weight_msd_MS_train)
+timeend<-Sys.time()
+runningtime_MSmsdpred_zscore<-timeend-timestart
+print(runningtime_MSmsdpred_zscore)
 save(MS_pred_msd_zscore, file = "../output/MS_pred_msd_zscore.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_msd_zscore <- pred_z_score_matrix(movie_UI, weight_msd_movie_train)
+timeend<-Sys.time()
+runningtime_moviemsdpred_zscore<-timeend-timestart
+print(runningtime_moviemsdpred_zscore) 
 save(movie_pred_msd_zscore, file = "../output/movie_pred_msd_zscore.RData")
 ```
 #### With Entropy 
 ```{r web predict}
 # Calculate predictions for MS
+timestart<-Sys.time()
 MS_pred_entropy_zscore <- pred_z_score_matrix(MS_UI, weight_entropy_MS_train)
+timeend<-Sys.time()
+runningtime_MSentropypred_zscore<-timeend-timestart
+print(runningtime_MSentropypred_zscore)
 save(MS_pred_entropy_zscore, file = "../output/MS_pred_entropy_zscore.RData")
 
+# Calculate predictions for movie
+timestart<-Sys.time()
 movie_pred_entropy_zscore <- pred_z_score_matrix(movie_UI, weight_entropy_movie_train)
+timeend<-Sys.time()
+runningtime_movieentropypred_zscore<-timeend-timestart
+print(runningtime_movieentropypred_zscore)
 save(movie_pred_entropy_zscore, file = "../output/movie_pred_entropy_zscore
      .RData")
 ```
