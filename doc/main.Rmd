@@ -189,7 +189,6 @@ save(movie_pred_entropy_zscore, file = "../output/movie_pred_entropy_zscore
      .RData")
 ```
 
-<<<<<<< HEAD
 =======
 ## EM Algorithm
 ```{r}
