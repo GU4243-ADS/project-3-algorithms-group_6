@@ -37,21 +37,36 @@ Results below:
 
 ![](./figs/mem_based2.png)
 
+After comparing the precision charts of the two models, we can conclude that the Z score is not a good modification for web data,  
+
 Algorithm Efficiency Analysis(Running time):
 
 ![](./figs/WEIGHT.png)
 
+It is very obvious that ENTROPY needs longer time than other methods of calculation for both MS and movie datasets. COSINE and MEAN SQUARED DIFFERENCE show similar weight calculation time which is lower than the time used by SPEARMAN and PEARSON methods. 
+
 ![](./figs/MS_PRE.png)
+
+From the MS running time chart, we found PEARSON has higher prediction efficiency than other methods, but COSINE has the lowest efficiency. 
 
 ![](./figs/ZSCORE_MS_PRE.png)
 
+For the prediction time of processed by Z score, PEARSON still has the shortest running time, and COSINE is still the one has the longest running time.
+
 ![](./figs/MOVIE_PRE.png)
+
+From the movie running time chart, we also found that PEARSON has the shortest running time, but ENTROPY has longest running time.
 
 ![](./figs/ZSCORE_MOVIE_PRE.png)
 
-![](./figs/MS_COM.png)
+After Z score process, SPEARMAN shows the highest prediction efficiency, and COSINE show the lowest prediction efficiency.
 
+![](./figs/MS_COM.png)
 ![](./figs/MOVIE_COM.png)
+
+According to the comparison graphs above, we can find that the prediction functions with Z score need longer time to finish because the standardization process. Without consideration about this, the models before and after standardization have similar tendency. 
+
+From the results above, we can deduce that the PEARSON is the best model for prediction, because it has a relatively lower weight calculation time but has good performance in predction with the shortest time (averagely). For other models, SPEARMAN model has similar accuracy with PEARSON in prediction, COSINE tends to have longer prediction time than other 4 models, ENTROPY model needs especially long time to calculate the weights.   
 
 ### Model Based Approach
 
