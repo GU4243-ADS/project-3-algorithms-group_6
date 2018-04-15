@@ -41,17 +41,17 @@ Algorithm Efficiency Analysis(Running time):
 
 ![](./figs/WEIGHT.png)
 
-![](./figs/MS PRE.png)
+![](./figs/MS_PRE.png)
 
-![](./figs/ZSCORE MS PRE.png)
+![](./figs/ZSCORE_MS_PRE.png)
 
-![](./figs/MOVIE PRE.png)
+![](./figs/MOVIE_PRE.png)
 
-![](./figs/ZSCORE MOVIE PRE.png)
+![](./figs/ZSCORE_MOVIE_PRE.png)
 
-![](./figs/MS COM.png)
+![](./figs/MS_COM.png)
 
-![](./figs/MOVIE COM.png)
+![](./figs/MOVIE_COM.png)
 
 ### Model Based Approach
 
