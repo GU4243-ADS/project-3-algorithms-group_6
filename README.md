@@ -37,7 +37,7 @@ Results below:
 
 ![](./figs/mem_based2.png)
 
-After comparing the precision charts of the two models, we can conclude that the Z score is not a good modification for web data,  
+After comparing the precision charts of the two models, we can conclude that the Z score may not be a good correction for web data, but can improve the accuracy for movie recommendation.
 
 Algorithm Efficiency Analysis(Running time):
 
