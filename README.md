@@ -29,13 +29,29 @@ For this project, we utilized memory-based and model-based algorithms to generat
 
 ### Memory Based Approach
 
-The memory-based model considered Spearman's correlation, Pearson's correlation, entropy, mean-squared-difference, SimRank and rating normalization as weights.
+The memory-based model considered Spearman's correlation, Pearson's correlation, entropy, mean-squared-difference, and rating normalization as weights.
 
 Results below:
 
 ![](./figs/mem_based.png)
 
 ![](./figs/mem_based2.png)
+
+Algorithm Efficiency Analysis(Running time):
+
+![](./figs/WEIGHT.png)
+
+![](./figs/MS PRE.png)
+
+![](./figs/ZSCORE MS PRE.png)
+
+![](./figs/MOVIE PRE.png)
+
+![](./figs/ZSCORE MOVIE PRE.png)
+
+![](./figs/MS COM.png)
+
+![](./figs/MOVIE COM.png)
 
 ### Model Based Approach
 
